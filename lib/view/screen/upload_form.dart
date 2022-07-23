@@ -54,16 +54,23 @@ class UploadForm extends StatelessWidget {
             child: ThemeButton(
                 buttonText: 'Submit',
                 onPressed: () {
-                  Get.dialog(Center(
-                      child: CircularProgressIndicator(
-                    color: themeColor,
-                  )));
-                  UploadController.uploadImage(
-                    image: image,
-                    location: _locationController.text,
-                    vehicleNo: _vehicleNoController.text,
-                    description: _descriptionController.text,
-                  );
+                  _vehicleNoController.text.isEmpty
+                      ? ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Please Input Vehicle No.')))
+                      : _locationController.text.isEmpty
+                          ? ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Please Input Location')))
+                          : Get.dialog(Center(
+                              child: CircularProgressIndicator(
+                              color: themeColor,
+                            ))).then((value) => UploadController.uploadImage(
+                                image: image,
+                                location: _locationController.text,
+                                vehicleNo: _vehicleNoController.text,
+                                description: _descriptionController.text,
+                              ));
                 }),
           )
         ],

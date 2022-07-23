@@ -52,8 +52,8 @@ class UploadController {
 
   static void uploadImage(
       {required File image,
-      String? location,
-      String? vehicleNo,
+      required String location,
+      required String vehicleNo,
       String? description}) async {
     try {
       await storage
