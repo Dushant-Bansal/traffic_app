@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:traffic_app/constants.dart';
 import 'package:traffic_app/controller/uploadController.dart';
 import 'package:traffic_app/view/screen/home_screen.dart';
 import 'package:traffic_app/view/widget/app_input_field.dart';
@@ -53,6 +54,10 @@ class UploadForm extends StatelessWidget {
             child: ThemeButton(
                 buttonText: 'Submit',
                 onPressed: () {
+                  Get.dialog(Center(
+                      child: CircularProgressIndicator(
+                    color: themeColor,
+                  )));
                   UploadController.uploadImage(
                     image: image,
                     location: _locationController.text,
