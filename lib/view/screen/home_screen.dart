@@ -124,13 +124,47 @@ class Home extends StatelessWidget {
             Padding(
               padding:
                   EdgeInsets.all(MediaQuery.of(context).size.width * 3 / 80),
-              child: Text(
-                'Uploads',
-                style: textStyle,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Recent Uploads',
+                    style: textStyle,
+                  ),
+                  TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(themeColor),
+                        overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.hovered)) {
+                              return themeColor.withOpacity(0.04);
+                            }
+                            if (states.contains(MaterialState.focused) ||
+                                states.contains(MaterialState.pressed)) {
+                              return themeColor.withOpacity(0.12);
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      onPressed: () => Get.to(() => PhotoViewGallery.builder(
+                          itemCount: _imagesList.length,
+                          builder: (context, index) {
+                            return PhotoViewGalleryPageOptions(
+                              imageProvider: NetworkImage(
+                                _imagesList[index],
+                              ),
+                              minScale: PhotoViewComputedScale.contained,
+                            );
+                          })),
+                      child: const Text('Load All'))
+                ],
               ),
             ),
             Obx(() {
               getImages();
+              int length = _imagesList.length < 4 ? _imagesList.length : 4;
               return _imagesList[0].isEmpty && _hasImages.value
                   ? Padding(
                       padding: const EdgeInsets.only(top: 80.0),
@@ -146,35 +180,21 @@ class Home extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: _imagesList[0].isEmpty ? 2 : 3,
+                        crossAxisCount: 2,
                         crossAxisSpacing:
                             MediaQuery.of(context).size.width * 1 / 80,
                         mainAxisSpacing:
                             MediaQuery.of(context).size.width * 1 / 80,
                       ),
-                      children: List.generate(_imagesList.length, (index) {
+                      children: List.generate(length, (index) {
                         return _imagesList[index].isEmpty
                             ? Text(
                                 'No uploads yet.',
                                 style: subtitleStyle,
                               )
-                            : GestureDetector(
-                                onTap: () =>
-                                    Get.to(() => PhotoViewGallery.builder(
-                                        itemCount: _imagesList.length,
-                                        builder: (context, index) {
-                                          return PhotoViewGalleryPageOptions(
-                                            imageProvider: NetworkImage(
-                                              _imagesList[index],
-                                            ),
-                                            minScale: PhotoViewComputedScale
-                                                .contained,
-                                          );
-                                        })),
-                                child: CachedNetworkImage(
-                                  imageUrl: _imagesList[index],
-                                  fit: BoxFit.cover,
-                                ),
+                            : CachedNetworkImage(
+                                imageUrl: _imagesList[index],
+                                fit: BoxFit.cover,
                               );
                       }),
                     );
