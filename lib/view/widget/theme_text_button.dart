@@ -18,7 +18,7 @@ class ThemeTextButton extends StatelessWidget {
       ),
       child: Text(
         text,
-        style: titleStyle.copyWith(
+        style: kTitleStyle.copyWith(
             fontWeight: FontWeight.normal, fontSize: 16.0, letterSpacing: -0.7),
       ),
     );

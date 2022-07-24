@@ -36,7 +36,7 @@ class FrontScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'Follow up Traffic Rules\nReport about others!',
-                                style: titleStyle.copyWith(
+                                style: kTitleStyle.copyWith(
                                     fontWeight: FontWeight.w800),
                                 maxLines: 2,
                                 textAlign: TextAlign.center,
@@ -44,7 +44,7 @@ class FrontScreen extends StatelessWidget {
                               const SizedBox(height: 20.0),
                               Text(
                                 'Never be afraid to stop those\nwho break Traffic Rules',
-                                style: subtitleStyle,
+                                style: kSubtitleStyle,
                                 maxLines: 2,
                                 textAlign: TextAlign.center,
                               ),

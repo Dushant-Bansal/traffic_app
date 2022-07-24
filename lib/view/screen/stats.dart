@@ -51,7 +51,7 @@ class Stats extends StatelessWidget {
           '${DateTime.now().subtract(const Duration(days: 6)).day} '
           '${DateFormat.MMM().format(DateTime.now().subtract(const Duration(days: 6)))} '
           '- ${DateTime.now().day} ${DateFormat.MMM().format(DateTime.now())}',
-          style: subtitleStyle,
+          style: kSubtitleStyle,
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height / 4,
@@ -83,7 +83,7 @@ class Stats extends StatelessWidget {
                     )
                   : Center(
                       child: CircularProgressIndicator(
-                        color: themeColor,
+                        color: kThemeColor,
                       ),
                     );
             }),

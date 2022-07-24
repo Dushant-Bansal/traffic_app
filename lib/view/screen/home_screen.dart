@@ -53,7 +53,7 @@ class Home extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.logout,
-              color: themeColor,
+              color: kThemeColor,
             ),
             onPressed: () {
               AuthController.logOut();
@@ -67,15 +67,15 @@ class Home extends StatelessWidget {
           UploadController.uploadImageFromGallery();
           Get.back();
         },
-        backgroundColor: themeColor,
-        hoverColor: themeColor.withOpacity(0.5),
+        backgroundColor: kThemeColor,
+        hoverColor: kThemeColor.withOpacity(0.5),
         child: const Icon(
           Icons.add_a_photo,
           color: Colors.white,
         ),
       ),
       body: RefreshIndicator(
-        color: themeColor,
+        color: kThemeColor,
         displacement: 0,
         onRefresh: () {
           init();
@@ -89,7 +89,7 @@ class Home extends StatelessWidget {
                   left: MediaQuery.of(context).size.width * 3 / 80),
               child: Text('Good $_time',
                   style: GoogleFonts.comfortaa(
-                    textStyle: subtitleStyle,
+                    textStyle: kSubtitleStyle,
                   )),
             ),
             const SizedBox(
@@ -105,7 +105,7 @@ class Home extends StatelessWidget {
                       letterSpacing: -1,
                       fontSize: GetPlatform.isIOS ? 28.0 : 20.0,
                       fontWeight: FontWeight.w800,
-                      textStyle: titleStyle,
+                      textStyle: kTitleStyle,
                     ));
               }),
             ),
@@ -117,7 +117,7 @@ class Home extends StatelessWidget {
                   EdgeInsets.all(MediaQuery.of(context).size.width * 3 / 80),
               child: Text(
                 'Stats',
-                style: textStyle,
+                style: kTextStyle,
               ),
             ),
             const Stats(),
@@ -129,20 +129,20 @@ class Home extends StatelessWidget {
                 children: [
                   Text(
                     'Recent Uploads',
-                    style: textStyle,
+                    style: kTextStyle,
                   ),
                   TextButton(
                       style: ButtonStyle(
                         foregroundColor:
-                            MaterialStateProperty.all<Color>(themeColor),
+                            MaterialStateProperty.all<Color>(kThemeColor),
                         overlayColor: MaterialStateProperty.resolveWith<Color?>(
                           (Set<MaterialState> states) {
                             if (states.contains(MaterialState.hovered)) {
-                              return themeColor.withOpacity(0.04);
+                              return kThemeColor.withOpacity(0.04);
                             }
                             if (states.contains(MaterialState.focused) ||
                                 states.contains(MaterialState.pressed)) {
-                              return themeColor.withOpacity(0.12);
+                              return kThemeColor.withOpacity(0.12);
                             }
                             return null;
                           },
@@ -170,7 +170,7 @@ class Home extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 80.0),
                       child: Center(
                           child: CircularProgressIndicator(
-                        color: themeColor,
+                        color: kThemeColor,
                       )),
                     )
                   : GridView(
@@ -190,7 +190,7 @@ class Home extends StatelessWidget {
                         return _imagesList[index].isEmpty
                             ? Text(
                                 'No uploads yet.',
-                                style: subtitleStyle,
+                                style: kSubtitleStyle,
                               )
                             : CachedNetworkImage(
                                 imageUrl: _imagesList[index],

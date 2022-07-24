@@ -44,8 +44,8 @@ class Bar extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(7.0),
                   color: noOfUploads == noOfUploadsMax
-                      ? themeColor.withOpacity(1)
-                      : themeColor.withOpacity(0.5),
+                      ? kThemeColor.withOpacity(1)
+                      : kThemeColor.withOpacity(0.5),
                 ),
               ),
             ),
@@ -53,11 +53,11 @@ class Bar extends StatelessWidget {
         ),
         Text(
           date,
-          style: subtitleStyle,
+          style: kSubtitleStyle,
         ),
         Text(
           formattedDate,
-          style: subtitleStyle,
+          style: kSubtitleStyle,
         ),
       ],
     );

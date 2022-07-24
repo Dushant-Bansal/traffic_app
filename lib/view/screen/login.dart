@@ -28,8 +28,8 @@ class Login extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Login',
-                    style: titleStyle.copyWith(
-                        color: themeColor,
+                    style: kTitleStyle.copyWith(
+                        color: kThemeColor,
                         fontSize: 40.0,
                         letterSpacing: -0.7)),
                 const SizedBox(height: 50.0),

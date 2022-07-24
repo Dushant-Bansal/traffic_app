@@ -3,13 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:traffic_app/constants.dart';
 import 'package:traffic_app/controller/uploadController.dart';
-import 'package:traffic_app/view/screen/home_screen.dart';
 import 'package:traffic_app/view/widget/app_input_field.dart';
+import 'package:traffic_app/view/widget/complaint_dropdown.dart';
 import 'package:traffic_app/view/widget/theme_button.dart';
 
 final TextEditingController _locationController = TextEditingController();
 final TextEditingController _vehicleNoController = TextEditingController();
-final TextEditingController _descriptionController = TextEditingController();
 final TextEditingController _mobileNoController = TextEditingController();
 
 class UploadForm extends StatelessWidget {
@@ -21,7 +20,6 @@ class UploadForm extends StatelessWidget {
   Widget build(BuildContext context) {
     _locationController.clear();
     _vehicleNoController.clear();
-    _descriptionController.clear();
     _mobileNoController.clear();
     return Scaffold(
       backgroundColor: Colors.white,
@@ -43,12 +41,9 @@ class UploadForm extends StatelessWidget {
           AppInputField(
               labelText: 'Location*',
               icon: Icons.location_on_outlined,
+              maxLines: 4,
               controller: _locationController),
-          AppInputField(
-              labelText: 'Description',
-              icon: Icons.description,
-              maxLines: 7,
-              controller: _descriptionController),
+          ComplaintDropDown(isIOS: GetPlatform.isIOS),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: ThemeButton(
@@ -64,7 +59,7 @@ class UploadForm extends StatelessWidget {
                                   content: Text('Please Input Location')))
                           : Get.dialog(Center(
                               child: CircularProgressIndicator(
-                              color: themeColor,
+                              color: kThemeColor,
                             )));
                   if (_vehicleNoController.text.isNotEmpty &&
                       _locationController.text.isNotEmpty) {
@@ -72,7 +67,7 @@ class UploadForm extends StatelessWidget {
                       image: image,
                       location: _locationController.text,
                       vehicleNo: _vehicleNoController.text,
-                      description: _descriptionController.text,
+                      description: ComplaintDropDownState.getComplaint(),
                     );
                   }
                 }),

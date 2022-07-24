@@ -26,21 +26,22 @@ class AppInputField extends StatelessWidget {
       child: TextField(
         controller: controller,
         keyboardType: TextInputType.emailAddress,
+        minLines: 1,
         maxLines: maxLines,
         decoration: InputDecoration(
           labelText: labelText,
           floatingLabelAlignment: FloatingLabelAlignment.start,
-          prefixIcon: Icon(icon, color: themeColor),
-          labelStyle: textStyle.copyWith(color: themeColor),
+          prefixIcon: Icon(icon, color: kThemeColor),
+          labelStyle: kTextStyle.copyWith(color: kThemeColor),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
               borderSide: BorderSide(
-                color: themeColor,
+                color: kThemeColor,
               )),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),
               borderSide: BorderSide(
-                color: themeColor,
+                color: kThemeColor,
               )),
         ),
         obscureText: isObscure,

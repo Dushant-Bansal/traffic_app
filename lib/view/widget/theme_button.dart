@@ -17,8 +17,8 @@ class ThemeButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(themeColor),
-        shadowColor: MaterialStateProperty.all<Color>(themeColor),
+        backgroundColor: MaterialStateProperty.all<Color>(kThemeColor),
+        shadowColor: MaterialStateProperty.all<Color>(kThemeColor),
         elevation: MaterialStateProperty.all<double>(2.0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(

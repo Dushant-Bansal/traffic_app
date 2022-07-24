@@ -89,7 +89,7 @@ class UploadController {
             children: [
               Text(
                 'Feedback?',
-                style: textStyle,
+                style: kTextStyle,
               ),
               ThemeTextButtonDark(
                 text: 'Skip',
@@ -146,7 +146,7 @@ class UploadController {
                       const EdgeInsets.only(left: 24.0, top: 12.0, right: 20.0),
                   child: Text(
                     'For Updates:',
-                    style: textStyle.copyWith(fontSize: 12.0),
+                    style: kTextStyle.copyWith(fontSize: 12.0),
                   ),
                 ),
                 SizedBox(
@@ -154,11 +154,11 @@ class UploadController {
                   child: TextField(
                     controller: _controller,
                     cursorColor: Colors.grey,
-                    style: textStyle.copyWith(fontSize: 15.0),
+                    style: kTextStyle.copyWith(fontSize: 15.0),
                     decoration: InputDecoration(
                       isDense: true,
                       hintText: 'Phone Number',
-                      hintStyle: textStyle.copyWith(fontSize: 12.0),
+                      hintStyle: kTextStyle.copyWith(fontSize: 12.0),
                       focusedBorder: const UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.black38)),
                     ),
