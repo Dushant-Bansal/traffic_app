@@ -158,7 +158,7 @@ class Home extends StatelessWidget {
                               minScale: PhotoViewComputedScale.contained,
                             );
                           })),
-                      child: const Text('Load All'))
+                      child: const Text('View All'))
                 ],
               ),
             ),

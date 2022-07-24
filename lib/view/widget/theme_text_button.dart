@@ -24,3 +24,35 @@ class ThemeTextButton extends StatelessWidget {
     );
   }
 }
+
+class ThemeTextButtonDark extends StatelessWidget {
+  const ThemeTextButtonDark(
+      {Key? key, required this.text, required this.onPressed})
+      : super(key: key);
+
+  final String text;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.black54),
+        overlayColor: MaterialStateProperty.resolveWith<Color?>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return Colors.black54.withOpacity(0.04);
+            }
+            if (states.contains(MaterialState.focused) ||
+                states.contains(MaterialState.pressed)) {
+              return Colors.black54.withOpacity(0.12);
+            }
+            return null;
+          },
+        ),
+      ),
+      onPressed: onPressed,
+      child: Text(text),
+    );
+  }
+}

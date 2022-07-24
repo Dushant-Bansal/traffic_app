@@ -65,12 +65,16 @@ class UploadForm extends StatelessWidget {
                           : Get.dialog(Center(
                               child: CircularProgressIndicator(
                               color: themeColor,
-                            ))).then((value) => UploadController.uploadImage(
-                                image: image,
-                                location: _locationController.text,
-                                vehicleNo: _vehicleNoController.text,
-                                description: _descriptionController.text,
-                              ));
+                            )));
+                  if (_vehicleNoController.text.isNotEmpty &&
+                      _locationController.text.isNotEmpty) {
+                    UploadController.uploadImage(
+                      image: image,
+                      location: _locationController.text,
+                      vehicleNo: _vehicleNoController.text,
+                      description: _descriptionController.text,
+                    );
+                  }
                 }),
           )
         ],
