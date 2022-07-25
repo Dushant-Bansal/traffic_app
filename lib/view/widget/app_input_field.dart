@@ -25,7 +25,6 @@ class AppInputField extends StatelessWidget {
       color: Colors.white,
       child: TextField(
         controller: controller,
-        keyboardType: TextInputType.emailAddress,
         minLines: 1,
         maxLines: maxLines,
         decoration: InputDecoration(

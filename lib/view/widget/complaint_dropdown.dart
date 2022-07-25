@@ -67,12 +67,6 @@ class ComplaintDropDownState extends State<ComplaintDropDown> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _descriptionController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Column(
       children: [

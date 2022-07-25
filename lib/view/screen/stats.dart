@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:traffic_app/constants.dart';
 import 'package:traffic_app/controller/downloadController.dart';
 import 'package:traffic_app/view/widget/bar.dart';
@@ -21,12 +23,19 @@ class Stats extends StatelessWidget {
       _noOfUploads[i] = await DownloadController.getNumberofUploads(date);
     }
     _noOfUploadsToday.value = _noOfUploads[0];
+    for (int i in _noOfUploads) {
+      _noOfUploadsMax.value =
+          _noOfUploadsMax.value > i ? _noOfUploadsMax.value : i;
+    }
     isLoaded.value = true;
   }
 
   static void init() {
     _noOfUploads = [0, 0, 0, 0, 0, 0, 0].obs;
     _noOfUploadsMax = 1.obs;
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      isLoaded.value = false;
+    });
   }
 
   @override
@@ -60,10 +69,6 @@ class Stats extends StatelessWidget {
                 EdgeInsets.all(MediaQuery.of(context).size.width * 3 / 160),
             child: Obx(() {
               getNoOfUploads();
-              for (int i in _noOfUploads) {
-                _noOfUploadsMax.value =
-                    _noOfUploadsMax.value > i ? _noOfUploadsMax.value : i;
-              }
               return isLoaded.value
                   ? ListView.builder(
                       itemCount: 7,
