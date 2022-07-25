@@ -194,7 +194,7 @@ class Home extends StatelessWidget {
                               )
                             : CachedNetworkImage(
                                 imageUrl: _imagesList[index],
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                               );
                       }),
                     );

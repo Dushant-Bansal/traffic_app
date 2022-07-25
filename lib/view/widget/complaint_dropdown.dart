@@ -4,7 +4,7 @@ import 'package:traffic_app/constants.dart';
 import 'app_input_field.dart';
 
 List<String> complaints = [
-  "Accident Related Offences",
+  "Accident Related Offence",
   "Blocking emergency vehicles",
   "Custom",
   "Drunken driving",
