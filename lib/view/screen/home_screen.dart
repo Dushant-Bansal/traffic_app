@@ -64,8 +64,36 @@ class Home extends StatelessWidget {
       backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          UploadController.uploadImageFromGallery();
-          Get.back();
+          Get.bottomSheet(
+            backgroundColor: Colors.white,
+            isScrollControlled: true,
+            SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom + 20),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.camera, color: kThemeColor),
+                      title: Text('Camera', style: kTextStyle),
+                      onTap: () {
+                        UploadController.uploadImageFromCamera();
+                        Get.back();
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.photo_library, color: kThemeColor),
+                      title: Text('Gallery', style: kTextStyle),
+                      onTap: () {
+                        UploadController.uploadImageFromGallery();
+                        Get.back();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
         },
         backgroundColor: kThemeColor,
         hoverColor: kThemeColor.withOpacity(0.5),
@@ -194,7 +222,7 @@ class Home extends StatelessWidget {
                               )
                             : CachedNetworkImage(
                                 imageUrl: _imagesList[index],
-                                fit: BoxFit.contain,
+                                fit: BoxFit.cover,
                               );
                       }),
                     );
