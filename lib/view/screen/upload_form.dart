@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 import 'package:traffic_app/constants.dart';
 import 'package:traffic_app/controller/locationController.dart';
@@ -48,7 +49,27 @@ class UploadForm extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Image.file(image),
+            child: Stack(
+              children: [
+                Image.file(image),
+                Positioned(
+                  right: 0,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.download,
+                      color: kThemeColor,
+                    ),
+                    color: Colors.white,
+                    onPressed: () {
+                      GallerySaver.saveImage(image.path).whenComplete(
+                        () => ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Downloaded'))),
+                      );
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
           AppInputField(
             labelText: 'Vehicle Number*',
