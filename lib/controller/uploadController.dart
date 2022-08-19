@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:exif/exif.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,51 @@ double rating = 3;
 Complaint? _complaint;
 
 class UploadController {
+  static Future<Map<String, double>?> _checkGPSData(File image) async {
+    Map<String, IfdTag> imgTags =
+        await readExifFromBytes(image.readAsBytesSync());
+
+    double latValue;
+    double longValue;
+
+    if (imgTags.containsKey('GPS GPSLongitude')) {
+      final gpsLatitude = imgTags['GPS GPSLatitude'];
+      final latitudeSignal = imgTags['GPS GPSLatitudeRef']!.printable;
+      List latitudeRation = gpsLatitude!.values.toList();
+      List latitudeValue = latitudeRation.map((item) {
+        return (item.numerator.toDouble() / item.denominator.toDouble());
+      }).toList();
+      double latitude = latitudeValue[0] +
+          (latitudeValue[1] / 60) +
+          (latitudeValue[2] / 3600);
+      if (latitudeSignal == 'S') latitude = -latitude;
+      latValue = latitude;
+
+      final gpsLongitude = imgTags['GPS GPSLongitude'];
+      final longitudeSignal = imgTags['GPS GPSLongitude']!.printable;
+      List longitudeRation = gpsLongitude!.values.toList();
+      List longitudeValue = longitudeRation.map((item) {
+        return (item.numerator.toDouble() / item.denominator.toDouble());
+      }).toList();
+      double longitude = longitudeValue[0] +
+          (longitudeValue[1] / 60) +
+          (longitudeValue[2] / 3600);
+      if (longitudeSignal == 'W') longitude = -longitude;
+      longValue = longitude;
+      return {"latitude": latValue, "longitude": longValue};
+    } else {
+      return null;
+    }
+  }
+
   static void uploadImageFromGallery() async {
     try {
       final XFile? file = await _picker.pickImage(
           source: ImageSource.gallery, imageQuality: 80);
       if (file != null) {
         File image = File(file.path);
-        Get.to(() => UploadForm(image: image));
+        final location = await _checkGPSData(image);
+        Get.to(() => UploadForm(image: image, location: location));
       } else {
         return;
       }
@@ -47,7 +86,8 @@ class UploadController {
           await _picker.pickImage(source: ImageSource.camera, imageQuality: 80);
       if (file != null) {
         File image = File(file.path);
-        Get.to(() => UploadForm(image: image));
+        final location = await _checkGPSData(image);
+        Get.to(() => UploadForm(image: image, location: location));
       } else {
         return;
       }

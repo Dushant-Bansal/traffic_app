@@ -14,12 +14,21 @@ final TextEditingController _vehicleNoController = TextEditingController();
 final TextEditingController _mobileNoController = TextEditingController();
 
 class UploadForm extends StatelessWidget {
-  const UploadForm({Key? key, required this.image}) : super(key: key);
+  const UploadForm({Key? key, required this.image, this.location})
+      : super(key: key);
 
   final File image;
+  final Map<String, double>? location;
 
   @override
   Widget build(BuildContext context) {
+    void initLocation(Map<String, double> location) async {
+      try {
+        _locationController.text =
+            await getLocation(location['latitude']!, location['longitude']!);
+      } catch (e) {}
+    }
+
     void getLocationAgain() async {
       try {
         _locationController.text = (await getLatLong())!;
@@ -39,6 +48,7 @@ class UploadForm extends StatelessWidget {
     _locationController.clear();
     _vehicleNoController.clear();
     _mobileNoController.clear();
+    if (location != null) initLocation(location!);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
