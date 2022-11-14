@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:traffic_app/constants.dart';
 import 'package:traffic_app/controller/downloadController.dart';
 import 'package:traffic_app/view/widget/bar.dart';
